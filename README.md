@@ -70,6 +70,7 @@
 * **Constraint-06 (Ограничение параллельных постов):** Конфигурация СТО программно ограничена максимум **20 параллельно функционирующими постами/подъемниками**.
 
 ## ПЗ-2 Продолжение 
+```mermaid
 flowchart LR
     subgraph SystemBoundary ["Auto Service Management System (Ядро СТО v1.0)"]
         UC01(["UC-01: Записаться на ТО онлайн"])
@@ -85,30 +86,30 @@ flowchart LR
         UC11(["UC-11: Оприходовать партию запчастей"])
         UC12(["UC-12: Сформировать отчет по рентабельности"])
 
-        %% Include relationships
+        %% Include
         UC01 -.->|"<<include>>"| UC02
         UC04 -.->|"<<include>>"| UC05
         UC04 -.->|"<<include>>"| UC06
         UC09 -.->|"<<include>>"| UC10
 
-        %% Extend relationships
+        %% Extend
         UC03 -.->|"<<extend>>"| UC01
         UC07 -.->|"<<extend>>"| UC04
     end
 
-    %% Actors
-    Client(("Автовладелец\n(Клиент)"))
+    %% Роли (Актеры)
+    Client(("Автовладелец<br/>(Клиент)"))
     Master(("Мастер-приёмщик"))
     Mechanic(("Автомеханик"))
     Storekeeper(("Кладовщик"))
     Manager(("Управляющий СТО"))
 
-    %% External Systems
-    Bank[["«External»\nБанк-Эквайер"]]
-    KKT[["«External»\nКассовый аппарат\n(ФФД 1.2)"]]
-    NotifyGate[["«External»\nSMS/Telegram\nшлюз"]]
+    %% Внешние сервисы
+    Bank[["«External»<br/>Банк-Эквайер"]]
+    KKT[["«External»<br/>Кассовый аппарат (ФФД 1.2)"]]
+    NotifyGate[["«External»<br/>SMS/Telegram шлюз"]]
 
-    %% Actor to Use Cases
+    %% Связи актеров с прецедентами
     Client --> UC01
     Master --> UC04
     Master --> UC09
@@ -117,7 +118,8 @@ flowchart LR
     Storekeeper --> UC06
     Manager --> UC12
 
-    %% Secondary system links
+    %% Связи со внешними системами
     UC09 --- Bank
     UC10 --- KKT
     UC07 --- NotifyGate
+```
